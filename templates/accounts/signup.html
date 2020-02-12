@@ -1,0 +1,18 @@
+{% extends 'base_accounts.html' %}
+
+{% block title %}Kitap Turnıvasına Kayıt Ol{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+  <div class="card text-center">
+  <h5 class="card-header">Üye Ol</h5>
+  <div class="card-body">
+    <h5 class="card-title">Lütfen aşağıda size uygun olan profili seçiniz</h5>
+    <a href="{% url 'student_signup' %}" class="btn btn-primary btn-lg" role="button">Öğrenciyim</a>
+    <a href="{% url 'teacher_signup' %}" class="btn btn-primary btn-lg" role="button">Öğretmenim</a>
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}

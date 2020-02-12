@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Etkinlik Oluştur{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'turnuva:ogretmen' ogretmen.pk %}">{{ogretmen.teacher.username}}</a></li>
+  <li class="breadcrumb-item"><a href = "{% url 'turnuva:etkinliklerim' ogretmen.pk%}">Etkinlikler</a></li>
+  <li class="breadcrumb-item"><a href = "{% url 'turnuva:etkinlik-detail' ogretmen.pk etkinlik.pk%}">{{etkinlik.sinif_adi}}-{{etkinlik.get_isim_display}}</a></li>
+  <li class="breadcrumb-item active">Öğrenciler</li>
+  
+{% endblock %}
+
+{% block content %}
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Ad-Soyad</th>
+      <th scope="col">Takım</th>
+      <th scope="col">Sayfa</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for ogrenci in ogrenciler %}
+    <tr>
+      <th scope="row">{{ogrenci.no}}</th>
+      <td>{{ogrenci.student.username}}</td>
+      <td>{{ogrenci.get_takim_display}}</td>
+      <td>{{ogrenci.sayfa}}</td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

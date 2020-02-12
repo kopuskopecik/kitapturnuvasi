@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{sinif.isim}}{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active mx-auto"><a href="{% url 'turnuva:ogretmen' ogretmen.pk %}">{{ogretmen.teacher.username}}</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mb-3">
+	<div class="col-lg-9 col-md-9 col-sm-12">		
+		<a type="button" href = "{{ogretmen.etkinlik_olustura_git}}" class="btn btn-primary btn-lg btn-block">Etkinlik Oluştur</a>
+		<a type="button" href = "{{ogretmen.etkinliklerim}}" class="btn btn-primary btn-lg btn-block">Etkinliklerim</a>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Sonuçlar</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Raporlar</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Ödüller</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Örnek Ödüller</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Tebrik-Uyarı</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Duyurular</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Dokümanlar</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Sohbet</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Siparişler</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block">Etkinlik Tanıtımları</button>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Etkinlik Oluştur{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'turnuva:ogretmen' ogretmen.pk %}">{{ogretmen.teacher.username}}</a></li>
+  <li class="breadcrumb-item"><a href = "{% url 'turnuva:etkinliklerim' ogretmen.pk%}">Etkinlikler</a></li>
+  <li class="breadcrumb-item active">{{etkinlik.sinif_adi}}-{{etkinlik.get_isim_display}}</li>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mb-3">
+<div class="col-lg-9 col-md-9 col-sm-12">
+<div class="card text-white bg-dark mb-3">
+  <div class="card-header">{{etkinlik.sinif_adi}}-{{etkinlik.ogretmen.teacher.username}}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{etkinlik.get_isim_display}}</h5>
+    <p class="card-text">Öğrencileri buraya yerleştirelim!!!!</p>
+  </div>
+  <ul class="bg-danger list-group list-group-flush">
+    <li class="list-group-item list-group-item-info"><a href = "#">Öğrenci No sıralaması</a></li>
+    <li class="list-group-item list-group-item-success">Bireysel Sıralama</li>
+    <li class="list-group-item list-group-item-warning">Takım Sıralaması</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link btn btn-sm btn-success">Öğrenci Ekle</a>
+    <a href="#" class="card-link btn btn-sm btn-info">Asistan Yetkilendir</a>
+	<a href="#" class="card-link btn btn-sm btn-danger">Öğenci Sil</a>
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock %}

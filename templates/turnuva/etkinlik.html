@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Etkinlik Oluştur{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Etkinlik oluştur</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form2.html' %}
+            <button type="submit" class="btn btn-primary btn-block">etkinlik oluştur</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

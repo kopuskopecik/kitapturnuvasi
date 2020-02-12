@@ -1,0 +1,99 @@
+.content {
+  min-height: calc(100vh - 50px);
+}
+.footer {
+  height: 50px;
+  background-color: #dc3545;
+  color:#fff;
+}
+
+.navbar-brand {
+  font-family: 'Peralta', cursive;
+}
+
+
+.fa-whatsapp {
+  color: #0aad27;
+  font-size: 18px;
+}
+
+.fa-book-reader{
+	font-size: 32px;
+}
+
+
+.tum-siparis-detail{
+	line-height: 1;
+}
+
+.slayt-resmi {
+	
+}
+
+#id_address {
+	height: 120px;
+}
+
+#id_siparis_notu{
+	height: 60px;
+}
+
+
+
+
+/* Extra small devices (phones, up to 480px) */
+@media screen and (max-width: 767px) {
+	.urun-basligi {
+		font-size: 13px;
+	}
+	
+	.siparis-basligi{
+		font-size: 1.5rem;
+	}
+	
+	.siparis-tablo{
+		font-size: 0.75rem;
+	}
+	
+	.liste {
+	max-height: 35vh;
+	overflow: auto;
+	margin-left:5px;
+	margin-top: 3px;
+	margin-top: 13px!important;
+}
+	
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+	.urun-basligi {
+		font-size: 13px;
+	}
+	.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
+	
+}
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+	.urun-basligi {
+		font-size: 14px;
+	}
+	
+	.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
+	
+}
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+	.urun-basligi {
+		font-size: 14px;
+	}
+	.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
+}

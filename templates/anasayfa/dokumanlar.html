@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Dokümanlar
+{% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="BU sayfamızda ürünlerimizn uygulanmasına faydalı olacak dokümanlara erişebilirsiniz.">
+		<meta name="keywords" content="Dokümanlar">
+{% endblock %}
+
+  {% block content %}
+  <div class = "row">
+  <div class = "col-md-8 mx-auto">
+ <div class="list-group">
+  {% for dokuman in dokumanlar %}
+  <a href="{{dokuman.dokuman_ekle.url}}" class="list-group-item list-group-item-action list-group-item-primary"><b>{{dokuman.isim}}</b> dokümanını indirmek için tıklayınız.</a>
+  {% endfor %}
+</div>
+ </div>
+ </div>
+ {% endblock %}

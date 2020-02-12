@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Ürünler {% endblock %}
+
+{% block content %}
+<div class="card-header text-center text-white bg-success mt-2 border border-white"><h4>MAĞAZAMIZ</h4></div>
+<div class="card text-center border border-white">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">	  
+	  <li class="nav-item dropdown ml-2">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Öğrenci Sayısı</a>
+		<div class="dropdown-menu">
+      {% for sayi in ogrenci_sayısı%}
+		<a class="dropdown-item" href="{% url 'shop:product_list__filter' sayi.0 %}">{{sayi.1}}</a>
+		{% endfor %}
+		</div>
+	  </li>   
+	  
+      <li class="nav-item dropdown ml-2">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Kategoriler</a>
+		<div class="dropdown-menu">
+		{% for category in categories%}
+		<a class="dropdown-item" href="{{ category.get_absolute_url }}">{{category.name}}</a>
+		{% endfor %}
+		</div>
+	  </li>   
+    </ul>
+  </div>
+</div> 
+ 
+ <div class = "row">
+  {% for product in products1 %}
+   <div class = "col-md-3 col-sm-4 mt-2 mb-2">
+       <div class="card text-center h-100 border border-white">  
+         <a href = "{{product.get_absolute_url }}">{% if product.category.image1 %}
+		   <img class="card-img-top img-responsive" src="{{product.category.image1.url}}" alt="{{product.name}}">{% endif %}
+		 </a>
+		  <div class="card-footer py-1 px-0">
+             <small class="font-weight-bold">{{product.price}} TL</small>
+	  {% if not product.category.ana_kategori.indirim_miktarı == 0 %}
+	  <small class="text-muted"><s>{{product.pahalı_fiyat_hesapla}} TL </s></small>
+	  {% endif %}
+        </div>
+         <div class="card-body px-0 py-0">
+		   	<div class="btn-group btn-group-sm justify-content-between w-100 mb-1" role="group" aria-label="Basic example">
+  {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
+	<a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary">Nasıl Uygulanır?</a>
+    {% endif %}
+	<a href = "{{product.get_absolute_url}}" type="button" class="btn btn-success">Ürünü İncele</a>
+</div> 
+           <h5 class="card-title urun-basligi my-auto">{{product.name}}</h5>
+           <p class="card-text">{{product.content}}</p>
+         </div>  
+       
+       </div>
+   </div>
+  {% endfor %}
+  
+    {% for product in products2 %}
+   <div class = "col-md-3 col-sm-4 mt-2 mb-2">
+       <div class="card text-center h-100 border border-white">  
+         <a href = "{{product.get_absolute_url }}">{% if product.category.image1 %}
+		   <img class="card-img-top img-responsive" src="{{product.category.image1.url}}" alt="{{product.name}}">{% endif %}
+		 </a>
+		         <div class="card-footer py-1">
+                <small class="font-weight-bold">{{product.price}} TL</small>
+	  {% if not product.category.ana_kategori.indirim_miktarı == 0 %}
+	  <small class="text-muted"><s>{{product.pahalı_fiyat_hesapla}} TL </s></small>
+	  {% endif %}
+        </div>
+         <div class="card-body">
+		   {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
+	       <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm btn-block mb-1">Nasıl Uygulanır</a>
+           {% endif %} 
+           <h5 class="card-title my-auto urun-basligi">{{product.name}}</h5>
+           <p class="card-text">{{product.content}}</p>
+         </div>  
+
+       </div>
+   </div>
+  {% endfor %}
+ </div>
+{% endblock %}

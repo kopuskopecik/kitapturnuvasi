@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Siparişlerim
+{% endblock %}
+
+{% block content %}
+{% include 'includes/messages.html' %}
+
+{% for kategory in kategori_sayısı %}
+<a href = "{{kategory.ana_kategori.get_absolute_url}}" type="button" class="btn btn-primary btn-sm btn-block text-left">{{kategory.name}}</a>
+{% endfor %}
+<a class = "btn btn-warning btn-sm btn-block mt-2" href= "{% url 'anasayfa:anasayfa' %}"><b>Ana Sayfaya Dön</b></a>
+{% endblock %}

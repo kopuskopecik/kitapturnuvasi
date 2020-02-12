@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Etkinlikler{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'turnuva:ogretmen' ogretmen.pk %}">{{ogretmen.teacher.username}}</a></li>
+  <li class="breadcrumb-item active">Etkinlikler</li>
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class = "card-deck">
+{% for etkinlik in etkinlikler %}
+<div class="card">
+  <!-- Resim
+  <img src="..." class="card-img-top" alt="...">
+  -->
+  <div class="card-body">
+  <a href = "{{etkinlik.get_absolute_url}}">
+    <h5 class="card-title">{{etkinlik.sinif_adi}}-{{etkinlik.get_isim_display}}</h5>
+  </a>	
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Öğrenci No sıralaması</li>
+    <li class="list-group-item">Bireysel Sıralama</li>
+    <li class="list-group-item">Takım Sıralaması</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link btn btn-sm btn-success">Öğrenci Ekle</a>
+    <a href="#" class="card-link btn btn-sm btn-info">Asistan Yetkilendir</a>
+	<a href="#" class="card-link btn btn-sm btn-danger">Öğenci Sil</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

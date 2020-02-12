@@ -1,0 +1,21 @@
+{% extends 'base_accounts.html' %}
+  {% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card card-arka-plan">
+        <div class="card-body">
+          <h3 class="card-title">Üye Ol</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form2.html' %}
+            <button type="submit" class="btn btn-primary btn-block">Hesap Oluştur</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted text-center">
+          Zaten bir hesabınız varsa? <a href="{% url 'login' %}">Giriş Yap</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+ {% endblock %}

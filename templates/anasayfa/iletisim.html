@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+  {% block content %}
+
+{% block title %}İletişim{% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="Tüm ürünlerimiz fatura ile gönderilmektedir. Madalyalarımız 5 yıl garantilidir. Herhangi bir problemde çözüm üretilir. Siparişim hangi kargo ile teslim edilecek ?">
+		<meta name="keywords" content="İletişim">
+{% endblock %}
+ 
+ <h3>Adres</h3>
+ <address>
+ Hamdibey Mahallesi, İnönü Cd. No:70, 17200 Biga/Çanakkale, Türkiye.
+
+WhatsApp : 0505 763 63 81
+ </address>
+ <h4 class = "text-center">  Sık Sorulan Sorular</h4>
+ <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Yapmış olduğumuz alışverişlerimiz ne zaman teslim edilir ?
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+		Siparişleriniz 1-5 iş günü içerisinde kargoya teslim edilir.      
+	</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Hangi ödeme yöntemleri web mağazamızda kabul edilir ?
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+			  EFT'li Ödeme – Kapıda Ödeme - Tek Çekim Kapıda Kredi Kartı Ödeme
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Satışı yapılan ürünlerin fatura ve garantisi var mıdır ?
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+		Tüm ürünlerimiz fatura ile gönderilmektedir.Herhangi bir problemde çözüm üretilir.
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ {% endblock %}

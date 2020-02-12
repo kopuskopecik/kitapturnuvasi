@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block sharethis %}
+	<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c&product=sticky-share-buttons"></script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c' async='async'></script>
+{% endblock %}
+
+
+{% block content %}
+{% include 'includes/messages.html' %}
+<div class = "row">
+  <div class = "col-md-4 col-sm-12 sol">
+      <div class="card mb-2 text-center border border-white">
+		<div class="card-header bg-danger text-white py-0">İLKOKUL-ORTAOKUL</div>
+		<div class="card-body">
+        {% for category in ana_kategoriler%}		 
+	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{category.arka_plan_renk}} btn-sm btn-block">{{category.name}}</a>
+		   {% endfor %} 
+		   <a href = "{% url 'anasayfa:cok_satanlar'  %}" type="button" class="btn btn-danger btn-sm btn-block">Çok Satanlar</a>
+		</div>
+    </div>
+  </div>
+  <div class = "col-md-8 col-sm-12 sag">
+	<div class="bd-example">
+		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+				
+			  {% for slayt in diger_slaytlar %}
+						
+				<li data-target="#carouselExampleCaptions" data-slide-to="{{forloop.counter}}"></li>
+			  {% endfor %}
+			</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+			  <picture>
+			  {% if ilk_slayt.image and ilk_slayt.image2 %}
+			    <source srcset = "{{ilk_slayt.image2.url}}" media = "(max-width:767px)">
+				<img src="{{ilk_slayt.image.url}}" class="d-block w-100 slayt-resmi" alt="...">
+			  {% endif %}
+			  </picture>
+				<div class="carousel-caption d-none d-md-block">
+					<h5>{{ilk_slayt.isim}}</h5>
+					<p>{{ilk_slayt.yazı}}</p>
+				</div>
+			</div>
+		{% for slayt in diger_slaytlar %}
+		<div class="carousel-item">
+		  <picture>
+		  {% if slayt.image and slayt.image2 %}
+			<source srcset = "{{slayt.image2.url}}" media = "(max-width:767px)">
+			<img src="{{ slayt.image.url }}" class="d-block w-100 slayt-resmi" alt="...">
+		  {% endif %}
+		  </picture>
+			<div class="carousel-caption d-none d-md-block">
+				<h5>{{ slayt.isim }}</h5>
+				<p>{{ slayt.yazı }}</p>
+			</div>
+		</div>
+		{% endfor %}
+		</div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+	</div>
+	</div>
+</div>
+</div>
+<div class="card-header w-100 text-white mt-3 bg-danger text-center py-0">ÜRÜNLERİMİZ</div>
+<div class="row">
+{% for urun in urunler%}
+<div class = "col-lg-3 col-md-4 col-sm-6 mb-2">
+  <div class="card h-100 mt-2 mb-2 border border-white">	
+   <a href = "{{urun.get_absolute_url}}"> {% if urun.category.image1 %}<img class="card-img-top img-responsive" src="{{urun.category.image1.url}}" alt="{{urun.name}}">{% endif %}
+	</a>
+	<div class="card-footer text-center py-1 px-0">
+      <small class="font-weight-bold">{{urun.price}} TL</small>
+	  {% if not urun.category.ana_kategori.indirim_miktarı == 0 %}
+	  <small class="text-muted"><s>{{urun.pahalı_fiyat_hesapla}} TL </s></small>
+	  {% endif %}
+    </div>
+    <div class="card-body text-center px-0 py-0">
+	
+	<div class="btn-group btn-group-sm justify-content-between w-100 mb-1" role="group" aria-label="Basic example">
+  {% if not urun.category.ana_kategori.sadece_madalyalı_mı %}
+	<a href = "{{urun.get_nasil_url}}" type="button" class="btn btn-primary">Nasıl Uygulanır?</a>
+    {% endif %}
+	<a href = "{{urun.get_absolute_url}}" type="button" class="btn btn-success">Ürünü İncele</a>
+</div>
+	  <h6 class="card-title urun-basligi my-auto">{{urun.name}}</h6>
+	</div>
+
+  
+  </div>
+   </div>
+{% endfor %}
+</div>
+<div class = "row mt-2">
+{% for konu in genel%}
+<div class="col-md-6 col-lg-4 mt-2">
+  <div class="card border-danger h-100 text-center">
+    <div class="card-header bg-danger py-1"><a class = "text-white" href = "{{konu.get_absolute_url}}">{{konu.başlık}}</a></div>
+    <div class="card-body py-1">
+      <p class="card-text">{{konu.kısa_içerik|safe|truncatechars:100}}</p>	 
+    </div>
+  </div>   
+</div>
+{% endfor %} 
+</div>
+
+{% endblock %}

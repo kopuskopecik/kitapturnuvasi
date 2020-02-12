@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Sepetiniz
+{% endblock %}
+
+{% block content %}
+{% include 'includes/messages.html' %}
+{% with totail_items=cart|length %}
+  <h4 class = "table-bordered bg-success text-white text-center mb-0 mt-3 py-1 siparis-basligi">
+  {% if cart|length > 0 %}
+	Sepetiniz
+  {% else %}
+    Sepetiniz boş!
+  {% endif %}
+{% endwith %}
+  </h4>
+<table class="table table-sm table-hover table-bordered table-responsive-sm siparis-tablo">
+  <thead >
+    <tr>
+      <th scope="col">Ürün</th>
+      <th scope="col">Miktar</th>
+      <th scope="col">Sil</th>
+	  {% if user.is_superuser %}
+	  <th scope="col">Ağırlık</th>
+	  {% endif %}
+	  <th scope="col">Birim Fiyat</th>
+	  <th scope="col">Toplam Fiyat</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in cart %}
+  {% with product=item.product  %}
+  <tr>
+    <td>{{ product.name }}</td>
+    <td>
+      <form action="{% url 'cart:cart_add' product.id %}" method="post" class = "form-inline">
+        {% csrf_token %}
+        {{ item.update_quantity_form.quantity }}
+        {{ item.update_quantity_form.update }}
+        <button type="submit" class="guncelle btn btn-sm btn-primary py-0">Güncelle</button>
+      </form>
+    </td>
+    <td>
+      <a class = "btn btn-danger btn-sm py-0" href="{% url 'cart:cart_remove' product.id %}">Kaldır</a>
+    </td>
+	{% if user.is_superuser %}
+	<td>{{ item.total_agırlık }} desi</td>
+	{% endif %}
+    <td>{{ item.price }} TL</td>
+    <td>{{ item.total_price }} TL</td>
+  </tr>
+{% endwith %}
+{% endfor %}
+
+  <tr>
+    <td><b>Ürünlerin Toplam Fiyatı</b></td>
+    <td colspan="{% if user.is_superuser %}4{% else %}3{% endif %}"></td>
+    <td colspan="num"><b>{{ cart.get_total_price }} TL</b></td>
+  </tr>
+  <tr>
+    <td><b>Kargo ücreti</b></td>
+    <td colspan="{% if user.is_superuser %}4{% else %}3{% endif %}"></td>
+    <td colspan="num"><b>{{ cart.get_total_kargo }} TL</b></td>
+  </tr>
+    <tr>
+    <td><b>Toplam</b></td>
+    <td colspan="{% if user.is_superuser %}4{% else %}3{% endif %}"></td>
+    <td colspan="num"><b>{{ cart.get_total_bedel }} TL</b></td>
+  </tr>
+  </tbody>
+</table>
+<div class="text-right">
+  <a href="{% url 'anasayfa:anasayfa' %}" class="btn btn-info mb-1">Alışverişe Devam</a>
+  <a href="{% if request.user.is_authenticated%}{% url 'orders:order_create' %} {% else %} {% url 'uyelik' %}{% endif %}" class="btn btn-success mb-1">Tamamla</a>
+</div>
+{% endblock %}

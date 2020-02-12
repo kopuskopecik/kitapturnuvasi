@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="card mb-2"><b>Son Gönderilen Mesaj:</b>
+{% if son_mesaj.resim %}
+  <img src="{{ileti.resim.url}}" class="card-img-top img-responsive" alt="{{resim}}">
+{% endif %}
+  <div class="card-body">
+    <p class="card-text">{{son_mesaj.mesaj|safe}}</p>
+	<p class="card-text text-right"><b>{{ileti.user}}</b></p>
+  </div>
+</div>
+
+
+			<form method="POST" novalidate enctype="multipart/form-data">
+				{% csrf_token %}
+				<h1>Ders oluştur <small>Son Dersin Numarası: {{son_ders.number}}</small></h1>
+				{{form|crispy}}
+				{{form.media}}
+				<input class="btn btn-primary" type="submit" value="Gönder">
+			</form>
+		
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Hesabım{% endblock %}
+
+
+  <li class="breadcrumb-item active">My account</li>
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'includes/form2.html' %}
+        <button type="submit" class="btn btn-success">Değişiklikleri Kaydet</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

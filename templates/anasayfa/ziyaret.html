@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Ziyaretçi Defteri{% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="Bu sayfamızdan sitemiz ve ürünlerimiz ile ilgili yorumlarınızı paylaşabilirsiniz.">
+		<meta name="keywords" content="Ziyaretçi Defteri">
+{% endblock %}
+
+  {% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+	
+	{% include 'includes/messages.html' %}
+	
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Yorum Ekle </h3>
+		  <p> Üyelik gerektirmeyen ziyaretçi defterimize, yorumlarınızı bekliyoruz.</p>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form2.html' %}
+            <button type="submit" class="btn btn-primary btn-block">Gönder</button>
+          </form>
+        </div>
+      </div>
+	  {% for yorum in yorumlar %}
+	  <div class="card mt-2">
+	  {% if yorum.okul == "İlkokul" %}
+		<div class="card-header text-white text-center py-0" style="background-color: #c3e6cb;">
+			<b>{{yorum.okul}}</b>
+		</div>
+		{% else %}
+		<div class="card-header text-white text-center py-0" style="background-color: #b8daff;">
+			{{yorum.okul}}
+		</div>
+	  {% endif %}
+		<div class="card-body">
+				<p>{{yorum.content}}</p>
+				<footer class="text-right"><b>{{yorum.isim}}</b></footer>
+		</div>
+     </div>
+	  {% endfor %}
+    </div>
+  </div>
+ 
+ {% endblock %}

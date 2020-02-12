@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{product.name}}-nasıl uygulanır
+{% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="{{product.name}} ürünün nasıl uygulandığına dair bilgilere bu sayfamızdan erişebilirsiniz.">
+		<meta name="keywords" content="{{product.name}} uygulanması">
+{% endblock %}
+
+{% block sharethis %}
+	<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c&product=sticky-share-buttons"></script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c' async='async'></script>
+{% endblock %}
+
+{% block content %}
+<div class = "row justify-content-md-center justify-content-sm-center justify-content-lg-center">
+	<div class = "col-md-6 col-lg-6 col-sm-8">
+		<div class="card mb-3 text-center">
+			<div class="card-header bg-danger text-white"><h5><a href = "{{product.get_absolute_url}}" class = "text-white">{{product.name}}</a> <br>NASIL UYGULANIR?</h5></div>
+		  {% if product.category.nasıl_uygulanır_resimleri %}
+			{% for resim in product.category.nasıl_uygulanır_resimleri.resimler.all %}
+				<img src="{{resim.image1.url}}" class="img-fluid img-thumbnail mb-2" alt="{{resim.isim}}">
+			{% endfor %}	
+		  {% endif %}
+  <div class="btn-group btn-group-sm justify-content-between w-100" role="group" aria-label="Basic example">
+  <a href = "{{product.category.ana_kategori.get_absolute_url}}" type="button" class="btn btn-warning">Kategorinin Diğer Ürünleri</a>
+  <a href = "{{product.get_absolute_url}}" type="button" class="btn btn-success btn-sm">Ürüne Git</a>
+  </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

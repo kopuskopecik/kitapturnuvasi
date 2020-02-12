@@ -1,0 +1,24 @@
+{% extends 'base_accounts.html' %}
+
+{% block title %}Log in to Django Boards{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7 col-sm-8">
+      <div class="card card-arka-plan">
+        <div class="card-body">
+          <h3 class="card-title">Giriş Yap</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {% include 'includes/form2.html' %}			
+            <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted text-center">
+          Üye değilseniz? <a href="{% url 'teacher_signup' %}">Üye olun</a>
+        </div>
+      </div>      
+    </div>
+  </div>
+{% endblock %}

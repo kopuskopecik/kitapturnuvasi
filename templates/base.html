@@ -1,0 +1,155 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Kitap Turnuvası{% endblock %}</title>
+	{% block metalar %}
+		<meta name="description" content="Kitap Turnuvası; Öğrencileri Kitap Okumaya Teşvik Amaçlı Sayfa ve Gün Hedefli Kitap Takip Setleri ve Okuma Takip Ödülleri Müşteri İle Buluşturan Sitedir.">
+		<meta name="keywords" content="Kitap Okuma Turnuvaları, Madalyalar">
+	{% endblock %}
+	<meta name="google-site-verification" content="JqYCcuFHbNFhvvKXW-o159bW1awA5o6DUbZqdX8eUkM" />
+	<meta name="yandex-verification" content="683141afc12c95dc" />
+	<link rel="shortcut icon" href="{% static 'img/favicon1.ico'%}" />
+	<link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Peralta" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap9.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+	{% block sharethis %}
+	
+		
+    {% endblock %}
+	{% block stylesheet %}{% endblock %}
+  </head>
+  
+ 
+  <body>
+    {% block body %}
+	<div class = "content">
+	<nav class="navbar navbar-light bg-light py-0">
+		<span class="navbar-text py-0">
+    <small><b>Kitap Okuma Etkinlikleri</b></small>
+		</span>
+		
+		<span class="navbar-text">
+    <i class="fab fa-whatsapp"> <small>0505 763 63 81</small></i>
+		</span>
+	</nav>
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container-fluid text-white">
+		  
+          
+			<a class="navbar-brand" href="{% url 'anasayfa:anasayfa' %}"><i class="fas fa-book-reader my-0 py-0"></i> Kitap Turnuvası</a>
+			
+			 
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainMenu">
+		  
+		    <ul class="navbar-nav ml-auto">
+				{% if user.is_superuser %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'orders:siparislerin_hepsi' %}">Tüm siparişler</a>
+				</li>
+				
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'mesaj:mesajlar' %}">Mesajlaşma</a>
+				</li>
+				{% endif %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'anasayfa:dokumanlar' %}"><i class="fas fa-file-download"></i> Dokümanlar</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'anasayfa:ziyaret' %}"><i class="far fa-comment-alt"></i> Ziyaretçi Defteri</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'anasayfa:iletisim' %}"> <i class = "fas fa-map-marker-alt"></i> İletişim</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="{% url 'shop:product_list' %}"><i class = "fas fa-store"></i> Mağaza</a>
+				</li>
+            {% if user.is_authenticated %}
+
+                <li class="nav-item dropdown active">
+                  <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <i class = "fas fa-chalkboard-teacher"></i> {{ user.username }}
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+					<a class="dropdown-item" href="{% url 'orders:siparisler' %}">Siparişlerim</a>
+                    <a class="dropdown-item" href="{% url 'my_account' %}">Hesabım</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">Şifre Değiştir</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Çıkış Yap</a>
+                  </div>
+                </li>
+              </ul>
+            {% else %}
+			<!--  -->
+              <form class="form-inline ml-auto">
+				<a href="{% url 'login' %}" class="btn btn-outline-warning">Giriş Yap</a>
+                <a href="{% url 'teacher_signup' %}" class="btn btn-outline-light ml-2">Kayıt Ol</a>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+	  
+ 
+
+      <div class="container">
+    <div class="row justify-content-end mr-1 mt-1 mb-2">
+         <button class="btn btn-sm btn-info ">
+            {% with totail_items=cart|length %}
+                {% if cart|length > 0 %}
+                    <a href="{% url 'cart:cart_detail' %}" style="color: #ffffff">
+                       <i class = "fas fa-shopping-cart"></i> {{ totail_items }} ürün, {{ cart.get_total_price }} tl
+                    </a>
+                    {% else %}
+                    <i class = "fas fa-shopping-cart"></i> Sepetiniz boş!
+                {% endif %}
+            {% endwith %}
+         </button>
+    </div>
+	
+
+		
+       
+		
+        {% block content %}
+        {% endblock %}
+		</div>
+		</div>
+		
+		
+      
+		<footer class = "footer mt-1 mb-0">
+		<ul class="list-unstyled list-inline text-center mb-0">
+      <li class="list-inline-item">
+        <a class="btn-floating btn-fb mx-1">
+          <i class="fab fa-facebook-f"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1">
+          <i class="fab fa-twitter"> </i>
+        </a>
+      </li>
+	  <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+    </ul>
+	
+	   <p class = "text-center mb-0"> © 2012 Tüm hakları saklıdır - <a href = "{% url 'anasayfa:copyright' %}" class = "text-white"> Kullanım Hakları</a> </p>
+		</footer>	
+	   
+    {% endblock body %}	
+    <script src="{% static 'js/jquery9.min.js' %}"></script>
+    <script src="{% static 'js/popper9.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap9.min.js' %}"></script>
+	{% block javascript %}{% endblock %}
+  </body>
+</html>

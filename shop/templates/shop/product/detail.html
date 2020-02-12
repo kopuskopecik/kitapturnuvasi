@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{product.name}}
+{% endblock %}
+
+{% block sharethis %}
+	<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c&product=sticky-share-buttons"></script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c' async='async'></script>
+{% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="{{product.name}}'e ait bilgilere bu sayfamızdan erişebilirsiniz.">
+		<meta name="keywords" content="{{product.name}}">
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-md-center justify-content-sm-center justify-content-lg-center">
+<div class = "col-md-5 col-lg-5 col-sm-6 mt-3">
+<div class="card text-center border border-white">
+  <a href = "{% if product.category.image2 %}{{product.category.image2.url}}{% endif %}"><img class="card-img-top img-responsive detail-resim" src="{{product.category.image1.url}}" alt="Card image cap"></a>
+    <div class="card-footer py-1 bg-light">
+          <small class="font-weight-bold">{{product.price}} TL</small>
+	  {% if not product.category.ana_kategori.indirim_miktarı == 0 %}
+	  <small class="text-muted"><s>{{product.pahalı_fiyat_hesapla}} TL </s></small>
+	  {% endif %}
+    </div>
+  <div class="card-body px-0 py-0">
+  <div class="btn-group btn-group-sm justify-content-between w-100 mb-1" role="group" aria-label="Basic example">
+  <a href = "{{product.category.ana_kategori.get_absolute_url}}" type="button" class="btn btn-warning">Kategorinin Diğer Ürünleri</a>
+  {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
+  <a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary btn-sm">Nasıl Uygulanır?</a>
+  {% endif %}
+  
+</div>
+  {% if product.category.ana_kategori.sayfa_durumu %}
+   
+    <div class="mx-auto mb-1 dropdown">
+      <button class="btn btn-light btn-sm d-inline dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Öğrenci Sayısı: {{product.get_ogrenci_sayisi_display}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for product in products %}
+        <a class="dropdown-item " href="{{product.get_absolute_url}}"> {{product.get_ogrenci_sayisi_display}}</a>
+        {% endfor %}
+      </div>
+    </div>
+  
+	
+  
+  {% endif %}
+    
+	<form class = "form-inline justify-content-center" action="{% url 'cart:cart_add' product.id %}" method="post">
+    {% csrf_token %}
+      {% include 'includes/form3.html' %}
+      <input type="submit" value="Sepete Ekle" class="btn btn-sm btn-primary ml-2">
+    </form>
+  </div>
+
+  
+</div>
+</div>
+<div class = "col-md-4 col-lg-4 col-sm-6 mt-3">
+	<div class = "car-header bg-danger text-white text-center py-1 rounded">Ürün içeriği</div>
+	<div class="card-text text-left mt-2 ml-2 urun-basligi">{{product.description|safe}}</div>
+</div>
+</div>
+{% endblock %}

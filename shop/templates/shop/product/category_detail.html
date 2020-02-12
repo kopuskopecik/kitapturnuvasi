@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{category.name}} {% endblock %}
+{% block metalar %}
+		<meta name="description" content="{{category.name}}'e ait ürünlerine bu sayfadan erişebilirsiniz.">
+		<meta name="keywords" content="{{category.name}}">
+{% endblock %}
+
+{% block sharethis %}
+	<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c&product=sticky-share-buttons"></script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c' async='async'></script>
+{% endblock %}
+
+{% block content %} 
+ <div class = "row justify-content-md-center justify-content-sm-center justify-content-lg-center">
+ 
+ <div class = "col-md-8 col-sm-12">
+ <div class="card-header text-center text-white bg-success mt-2 border border-white">
+    <h4>{{category.name}}</h4>
+  </div>
+  
+<div class="card text-center border border-white">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+	{% if not category.bireysel_mi %}
+	  <li class="nav-item dropdown ml-2">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Öğrenci Sayısı</a>	
+		<div class="dropdown-menu">
+      {% for sayi in ogrenci_sayısı%}
+		<a class="dropdown-item" href="{% url 'shop:product_list__filter_by_category' category.slug sayi.0 %}">{{sayi.1}}</a>
+		{% endfor %}
+		</div>
+	  </li>   
+	 {% endif %} 
+	  
+      <li class="nav-item dropdown ml-2">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Diğer Kategoriler</a>
+		<div class="dropdown-menu">
+		<div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{% url 'shop:product_list'%}">Hepsi</a>
+		{% for category in categories%}
+		<a class="dropdown-item" href="{{ category.get_absolute_url}}">{{category.name}}</a>
+		{% endfor %}
+		</div>
+	  </li>
+
+	  
+    </ul>
+  </div>
+</div>
+ <div class = "row ">
+  {% for product in products %}
+   <div class = "col-md-6 col-sm-6 mt-2 mb-2">
+       <div class="card text-center border border-white">  
+         <a href = "{{product.get_absolute_url }}">{% if product.category.image1 %}
+		   <img class="card-img-top img-responsive" src="{{product.category.image1.url}}" alt="{{product.name}}">{% endif %}
+		 </a>
+		         <div class="card-footer py-1 px-0">
+                <small class="font-weight-bold">{{product.price}} TL</small>
+	  {% if not product.category.ana_kategori.indirim_miktarı == 0 %}
+	  <small class="text-muted"><s>{{product.pahalı_fiyat_hesapla}} TL </s></small>
+	  {% endif %}
+        </div>
+         <div class="card-body px-0 py-0">
+		   	<div class="btn-group btn-group-sm justify-content-between w-100 mb-1" role="group" aria-label="Basic example">
+  {% if not product.category.ana_kategori.sadece_madalyalı_mı %}
+	<a href = "{{product.get_nasil_url}}" type="button" class="btn btn-primary">Nasıl Uygulanır?</a>
+    {% endif %}
+	<a href = "{{product.get_absolute_url}}" type="button" class="btn btn-success">Ürünü İncele</a>
+</div>
+           <h5 class="card-title urun-basligi my-auto">{{product.name}}</h5>
+         </div>  
+
+       </div>
+   </div>
+  {% endfor %}
+</div>,  
+ </div>,
+ </div>
+{% endblock %}

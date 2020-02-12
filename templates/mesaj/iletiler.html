@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'includes/messages.html' %}
+
+
+<p>
+	<a class = "btn btn-primary" href = "{% url 'mesaj:mesaj-create' %}"> Mesaj Yaz</a>
+</p>
+{% for ileti in iletiler %}
+<div class="card mb-2">
+{% if ileti.resim %}
+  <img src="{{ileti.resim.url}}" class="card-img-top img-responsive" alt="{{resim}}">
+{% endif %}
+  <div class="card-body">
+    <p class="card-text">{{ileti.mesaj|safe}}</p>
+	<p class="card-text text-right"><b>{{ileti.user}}</b>
+	
+		{% if request.user == ileti.user %}
+			<a class = "btn btn-warning" href = "{% url 'mesaj:mesaj-update' ileti.id %}">Düzenle</a>
+			<a class = "btn btn-danger" href = "{% url 'mesaj:mesaj-delete' ileti.id %}">Sil</a>
+		{% endif %}
+	</p>
+	
+  </div>
+</div>
+
+{% endfor %}
+
+<p>
+	<a class = "btn btn-primary" href = "{% url 'mesaj:mesaj-create' %}"> Mesaj Yaz</a>
+</p>
+
+
+{% endblock %}
