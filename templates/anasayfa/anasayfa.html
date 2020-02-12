@@ -12,7 +12,7 @@
 <div class = "row">
   <div class = "col-md-4 col-sm-12 sol">
       <div class="card mb-2 text-center border border-white">
-		<div class="card-header bg-danger text-white py-0">İLKOKUL-ORTAOKUL</div>
+		<div class="card-header bg-primary text-white py-0">İLKOKUL-ORTAOKUL</div>
 		<div class="card-body">
         {% for category in ana_kategoriler%}		 
 	        <a href = "{{category.get_absolute_url}}" type="button" class="btn {{category.arka_plan_renk}} btn-sm btn-block">{{category.name}}</a>
@@ -72,7 +72,7 @@
 	</div>
 </div>
 </div>
-<div class="card-header w-100 text-white mt-3 bg-danger text-center py-0">ÜRÜNLERİMİZ</div>
+<div class="card-header w-100 text-white mt-3 bg-primary text-center py-0">ÜRÜNLERİMİZ</div>
 <div class="row">
 {% for urun in urunler%}
 <div class = "col-lg-3 col-md-4 col-sm-6 mb-2">
@@ -105,7 +105,7 @@
 {% for konu in genel%}
 <div class="col-md-6 col-lg-4 mt-2">
   <div class="card border-danger h-100 text-center">
-    <div class="card-header bg-danger py-1"><a class = "text-white" href = "{{konu.get_absolute_url}}">{{konu.başlık}}</a></div>
+    <div class="card-header bg-primary py-1"><a class = "text-white" href = "{{konu.get_absolute_url}}">{{konu.başlık}}</a></div>
     <div class="card-body py-1">
       <p class="card-text">{{konu.kısa_içerik|safe|truncatechars:100}}</p>	 
     </div>

@@ -45,8 +45,8 @@ urlpatterns = [
     path('accounts/signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
 	#path('accounts/turnuva/', turnuva, name='turnuva'),
 	
-	path('google102aeaa3d2712612.html', TemplateView.as_view(template_name="google102aeaa3d2712612.html")),
-	path('t4qt79m922kcpzkf7tuwn3mmebsdva.html', TemplateView.as_view(template_name="t4qt79m922kcpzkf7tuwn3mmebsdva.html")),
+	#path('google102aeaa3d2712612.html', TemplateView.as_view(template_name="google102aeaa3d2712612.html")),
+	#path('t4qt79m922kcpzkf7tuwn3mmebsdva.html', TemplateView.as_view(template_name="t4qt79m922kcpzkf7tuwn3mmebsdva.html")),
     path('robots.txt/', TemplateView.as_view(template_name="robots.txt", content_type ="text/plain")),
 	path('sitemap.xml/', sitemap, {'sitemaps':sitemaps}),
 	
