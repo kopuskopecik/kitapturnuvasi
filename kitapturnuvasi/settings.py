@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'kitap.urls'
+ROOT_URLCONF = 'kitapturnuvasi.urls'
 
 TEMPLATES = [
     {
@@ -86,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'kitap.wsgi.application'
+WSGI_APPLICATION = 'kitapturnuvasi.wsgi.application'
 
 
 # Database
