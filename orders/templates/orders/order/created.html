@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Alışverişiniz tamamlandı.
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Siparişiniz alındı!</h4>
+  <p>Teşekkür ederiz! {% if order.kargo_tipi == '3' %} Lütfen Yapı Kredi Bankası Havva Öztürk TR 330006701000000045955485 NO'lu IBAN numarasına ödemenizi yapınız.{% endif %}</p>
+  <hr>
+  <p class="mb-0">Siparişiniz başarıyla gerçekleştirildi. Sipariş numaranız <strong>{{ order.get_siparis_no }}</strong>.</p>
+  </div>
+  	 <table class="table table-hover table-bordered table-responsive-sm">
+  <thead class ="bg-warning text-center">
+    <tr>
+      <th scope="col">Ürün</th>
+	  <th scope="col">Fiyat</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in order.orderitem_set.all %}
+  <tr>
+    <td>{{item.quantity}} Adet- {{ item.product.name }}</td>
+    <td>{{ item.get_cost }} TL</td>
+  </tr>
+{% endfor %}
+
+  <tr>
+    <td><b>Ürünlerin Toplam Fiyatı</b></td>
+    <td colspan="num"><b>{{ order.get_total_cost }} TL</b></td>
+  </tr>
+  <tr>
+    <td><b>Kargo ücreti</b></td>
+    <td colspan="num"><b>{{ order.get_total_kargo }} TL</b></td>
+  </tr>
+  <tr>
+    <td><b>Bankacılık Bedeli</b></td>
+    <td colspan="num"><b>{{ order.banka_bedel }} TL</b></td>
+  </tr>
+  <tr>
+    <td><b>Toplam</b></td>
+    <td colspan="num"><b>{{ order.get_total_bedel }} TL</b></td>
+  </tr>
+  </tbody>
+</table>
+{% endblock %}

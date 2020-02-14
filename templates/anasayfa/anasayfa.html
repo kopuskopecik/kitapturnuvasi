@@ -104,7 +104,7 @@
 <div class = "row mt-2">
 {% for konu in genel%}
 <div class="col-md-6 col-lg-4 mt-2">
-  <div class="card border-danger h-100 text-center">
+  <div class="card border-primary h-100 text-center">
     <div class="card-header bg-primary py-1"><a class = "text-white" href = "{{konu.get_absolute_url}}">{{konu.başlık}}</a></div>
     <div class="card-body py-1">
       <p class="card-text">{{konu.kısa_içerik|safe|truncatechars:100}}</p>	 

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Istatistikler
+{% endblock %}
+
+{% block content %}
+
+<form method = "post" class = "mb-2" action = "{% url 'orders:tarih' %}">
+{% csrf_token %}
+  <div class="row">
+    <div class="col">
+	<label for="start">Başlangıç Tarihi:</label>
+<input class = "form-control"type="date" id="start" name="bir"
+	   value="2019-09-01"
+       min="2019-01-01" max="2030-01-01" required>
+    </div>
+    <div class="col">
+      <label for="start">Bitiş Tarihi:</label>
+<input class = "form-control" type="date" id="start" name="iki"
+	   value="2019-10-01"
+       min="2019-01-01" max="2030-01-01" required>
+    </div>
+	</div>
+  <button type="submit" class="btn btn-primary btn-block btn-sm mt-1">Gönder</button>
+</form>
+<hr>
+<div class = "row">
+    {% for key, value in gunler.items %}
+  <div class = "col-md-4 col-sm-6 col-xs-2 mb-2">
+	<a href = "{% url 'orders:istatistik' value %}" class = "btn btn-md btn-outline-secondary btn-block">{{key}}</a>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

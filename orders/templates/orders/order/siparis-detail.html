@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Siparişiniz
+{% endblock %}
+
+{% block content %}
+{% include 'includes/messages.html' %}
+	<div class = "row">
+		<div class = "col-md-3 pl-0 mt-0 detailmenu liste">
+			<div class="list-group list-group-flush mt-0">
+			  {% for order in siparisler %}
+				<a href="{{order.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info {% if order.id ==  order.id %}active{% endif %}">{{order.first_name}} {{order.last_name}}<small><b>-{{order.get_siparis_durumu_display}}-{{order.created|date}}</b></small></a>
+			  {% endfor %}
+			</div>
+		</div>
+		<div class = "col-md-9 icerik tum-siparis-detail">
+			<h2 class = "text-center text-danger headline">		
+				{{siparis.first_name}} {{siparis.last_name}}
+				- <span class = "badge badge-pill badge-warning">{{siparis.get_siparis_durumu_display}}</span>
+			</h2>
+			<div class = "row">
+			<div class = "col-md-6 col-lg-6">
+			<h3 class = "text-left text-danger headline">		
+				Sipariş Bilgileri			
+			</h3>
+			<a href = "{{siparis.siparis_duzenle}}" class = "btn btn-warning btn-sm">Siparişi Düzenle</a>
+			<a href = "{{siparis.siparis_olustur}}" class = "btn btn-success btn-sm">Yeni Sipariş Oluştur</a>
+			<hr>
+			<p class = "mb-1"><b>Sipariş Numarası:</b> {{siparis.id}}</p>
+			<p class = "mb-1"><b>Ödeme Tercihi:</b> {{siparis.get_kargo_tipi_display}}</p>
+			<p class = "mb-1"><b>Email:</b> {{siparis.email}}</p>
+			<p class = "mb-1"><b>Telefon No:</b> {{siparis.phone}}</p>
+			<p class = "mb-1"><b>Adres:</b> {{siparis.address}}</p>
+			<p class = "mb-1"><b>Şehir:</b> {{siparis.get_city_display}}</p>
+			<p class = "mb-1"><b>Tarih:</b> {{siparis.created}}</p>
+			<p class = "mb-1"><b>Ödeme Durumu:</b> {{siparis.paid}}</p>
+			<p class = "mb-1"><b>Kullanıcı:</b> {{siparis.user.username}}</p>
+			<p class = "mb-1"><b>Sipariş Durumu:</b> {{siparis.get_siparis_durumu_display}}</p>
+			<p class = "mb-1"><b>Sipariş Notu:</b> {{siparis.siparis_notu}}</p>
+			<p class = "mb-1"><b>İndirim Miktarı:</b> {{siparis.indirim_tutari}} TL</p>
+			<p class = "mb-1"><b>Kargo Tutarı:</b> {{siparis.get_total_kargo}} TL</p>
+			<p class = "mb-1"><b>Bankacılık Bedeli:</b> {{siparis.banka_bedel}} TL</p>
+			<p class = "mb-1"><b>Toplam Tutar:</b> {{siparis.get_total_bedel}} TL</p>
+			<p class = "mb-1"><b>İndirimli Toplam Tutar:</b> {{siparis.get_indirimli_bedel}} TL</p>
+			</div>
+			<div class = "col-md-6">
+				<h3 class = "text-left text-danger headline">		
+				Ürün Bilgileri			
+				</h3>
+				<a href = "{{siparis.urun_ekle}}" class = "btn btn-info btn-sm">Siparişe Ürün Ekle</a>
+				<hr>
+				{% for urun in siparis.orderitem_set.all %}
+					<p class = "mb-1"><b>Ürün adı:</b> <a href = "{{urun.product.get_absolute_url}}">{{urun.product.name}}</a></p>
+					<p class = "mb-1"><b>Ürün Birim Fiyatı:</b> {{urun.price}} TL</p>
+					<p class = "mb-1"><b>Ürün adedi:</b> {{urun.quantity}}</p>
+					<p class = "mb-1"><b>Ürün Toplam Tutarı:</b> {{urun.get_cost}} TL</p>
+					<p class = "mb-1"><b>Ürün İçeriği:</b> {{urun.product.description|safe}}</p>
+					<hr>
+				{% endfor %}
+			</div>
+			</div>
+			
+			<div class = "oklar">
+			  {% if onceki_siparis %}
+				<p class = "text-right"><a href="{{onceki_siparis.get_absolute_url}}" class="btn btn-success" role="button">{{onceki_siparis.first_name}} {{onceki_siparis.last_name}} <i class ="fas fa-angle-double-right"></i></a></p>
+			  {% endif %}
+			  {% if sonraki_siparis %}
+				<p class = "text-left"><a href="{{sonraki_siparis.get_absolute_url}}" class="btn btn-success" role="button"><i class ="fas fa-angle-double-left"></i> {{sonraki_siparis.first_name}} {{sonraki_siparis.last_name}} </a></p>
+			  {% endif %}					
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

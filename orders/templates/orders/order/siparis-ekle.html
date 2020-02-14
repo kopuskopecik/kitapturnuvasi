@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<form method="POST">
+				{% csrf_token %}
+				<h1>{{siparis.firs_name}} {{siparis.last_name}} sipariş Ekle/Düzenle</h1>
+				{{form|crispy}}				
+				<input class="btn btn-primary" type="submit" value="Gönder">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

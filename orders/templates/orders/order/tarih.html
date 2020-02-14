@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    İstatistik
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ilk_tarih}} ile {{ikinci_tarih}} Arası Veriler</h2>
+<hr>
+
+<p> <b>Toplam Satıs Adedi:</b> {{satıs_adedi.adet}}</p>
+<p> <b>Toplam Satıs Tutarı:</b> {{toplam_satıs.toplam}} TL</p>
+
+<h3> Satılan ürünler</h3>
+<hr>
+{% for urun in urun_sayısı %}
+	<p>{{urun.sayi}} set {{urun.name}}</p>
+{% endfor %}
+<h3> Satılan Kategoriler</h3>
+<hr>
+{% for kategory in kategori_sayısı %}
+	<p>{{kategory.adet}} set {{kategory.name}}</p>
+{% endfor %}
+{% endblock %}

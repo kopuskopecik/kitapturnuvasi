@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<form method="POST" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+				{% csrf_token %}
+				<h1>{{siparis.firs_name}} {{siparis.last_name}} Siparişine ürün ekleme</h1>
+				{{form|crispy}}				
+				<input class="btn btn-primary" type="submit" value="Gönder">
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("#id_kategori").change(function () {
+      var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+      var countryId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'kategori': countryId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_product").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+{% endblock %}

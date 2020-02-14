@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Siparişiniz
+{% endblock %}
+
+{% block content %}
+{% include 'includes/messages.html' %}
+  <div class="row justify-content-center mt-2">
+    <div class="col-lg-7 col-md-7 col-sm-12">	
+      <div class="card mb-2">
+        <div class="card-body">
+          <h3 class="card-title text-center">Sipariş</h3>
+		   <div class="alert alert-warning alert-dismissible" role="alert">
+				Kapıda nakit ödemeli ve kapıda tek çekim kredi kartı ödemeli tercihlerinizde {{cart.odeme_bedeli}} TL bankacılık işlem bedeli faturanıza yansıyacaktır.
+				Havale/Eft ödemesi Yapı Kredi Bankasına yapılmaktadır.
+		   </div>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form2.html' %}
+            <button type="submit" class="btn btn-primary btn-block">Gönder</button>
+          </form>
+        </div>
+      </div>          
+	 </div>
+	 <div class = "col-lg-5 col-md-5 col-sm-12">
+	 
+	 <table class="table table-hover table-bordered table-responsive-sm">
+  <thead class ="bg-warning text-center">
+    <tr>
+      <th scope="col">Ürün</th>
+	  <th scope="col">Fiyat</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in cart %}
+  {% with product=item.product  %}
+  <tr>
+    <td>{{ product.name }}</td>
+    <td>{{ item.total_price }} TL</td>
+  </tr>
+{% endwith %}
+{% endfor %}
+
+  <tr>
+    <td><b>Ürünlerin Toplam Fiyatı:</b></td>
+    <td colspan="num"><b>{{ cart.get_total_price }} TL</b></td>
+  </tr>
+  <tr>
+    <td><b>'Yurtiçi' Kargo Ücreti:</b></td>
+    <td colspan="num"><b>{{ cart.get_total_kargo }} TL</b></td>
+  </tr>
+    <tr>
+    <td><b>Toplam:</b></td>
+    <td colspan="num"><b>{{ cart.get_total_bedel }} TL</b></td>
+  </tr>
+  </tbody>
+</table>
+	 </div >
+  </div>
+{% endblock %}
